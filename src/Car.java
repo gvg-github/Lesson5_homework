@@ -57,10 +57,13 @@ public class Car implements Runnable {
 
         //+ синхронизация для вывода сообщения о завершении и определение победителя
         MainClass.CDLFINISH.countDown();
-        if (!MainClass.first) {
-            MainClass.first = true;
-            System.out.println(name + " WIN!");
+        synchronized (this) {
+            if (!MainClass.first) {
+                MainClass.first = true;
+                System.out.println(name + " WIN!");
+            }
         }
+
         //- синхронизация для вывода сообщения о завершении и определение победителя
     }
 }
